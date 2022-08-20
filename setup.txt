@@ -1,0 +1,20 @@
+constraints setup(do when connected to robot and know ports and unknowns)
+1.gyro(assuming that it is a pigion as that is what nevo told me)pigeonID line 15 in constants to the pigion id and invertgyro is set to make sure that the gyro is conter clock wise
+2.track width (center to center distance of left and right modules)
+wheel base same as track width but front to back instead of left to right
+wheel diameter self explanatory
+drive gear ratio standerd mk3 is 6.86 / 1 what we have
+angle gear ratio sds mk3s are 12.8/1
+angle motor pid vals -
+try the ones from the old code and if those dont work start from a low p like 0.01 the multiply by 10 untile the modules start to oscilate(shake)
+then start to go back by dividing by two the addin half or something(10 to 5 to 7.5 ...)
+do the same to the d vals and dont do anything to the i vals
+get the drive characterization values (KS, KV, KA) by using the WPILib characterization tool https://docs.wpilib.org/en/stable/docs/software/pathplanning/system-identification/introduction.html.
+tune drive kp till it doesnt overshoot and oscilate at target vel 
+for mac speed and max anguler we can use thoretical or real world ones from tests 
+set cancoder invert and angle motor invert so both are counter clockwise 
+set module ids 
+setting Offsets
+For finding the offsets, use a piece of 1x1 metal that is straight against the forks of the front and back modules (on the left and right side) to ensure that the modules are straight.
+You need to point the bevel gears of all the wheels in the same direction (either facing left or right). And preferably you should have the wheels facing in the direction where a postive input to the drive motor drives forward. If for some reason you set the offsets with the wheels backwards, you can change the driveMotorInvert to fix.
+Open smartdashboard (or shuffleboard and go to the smartdashboard tab), you will see 4 printouts called "Mod 0 Cancoder", "Mod 1 Cancoder", etc. If you have already straightened the modules, copy those 4 numbers exactly (to 2 decimal places) to their respective angleOffset variable in constants.
